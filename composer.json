@@ -30,7 +30,7 @@
         "symfony/routing": "^2.3",
         "symfony/security": "^2.3",
         "symfony/templating": "^2.3",
-        "symfony/validator": "^2.3",
+        "symfony/validator": "^2.3||^3.0",
         "sonata-project/admin-bundle": "^3.4",
         "sonata-project/block-bundle": "^3.1.1",
         "sonata-project/seo-bundle": "^2.0",
