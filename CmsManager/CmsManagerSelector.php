@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
 
@@ -121,10 +122,16 @@ class CmsManagerSelector implements CmsManagerSelectorInterface, LogoutHandlerIn
     }
 
     /**
-     * @return SecurityContextInterface
+     * @return SecurityContextInterface | TokenStorageInterface
      */
     private function getSecurityContext()
     {
-        return $this->container->get('security.context');
+        if($this->container->has('security.token_storage'))
+        {
+            return $this->container->get('security.token_storage');
+        }else{
+            return $this->container->get('security.context');
+        }
+        
     }
 }

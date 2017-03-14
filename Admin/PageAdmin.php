@@ -27,6 +27,8 @@ use Sonata\PageBundle\Model\PageManagerInterface;
 use Sonata\PageBundle\Model\SiteInterface;
 use Sonata\PageBundle\Model\SiteManagerInterface;
 
+use Sonata\PageBundle\Form\Type\PageTypeChoiceType;
+
 /**
  * Admin definition for the Page class.
  *
@@ -264,7 +266,7 @@ class PageAdmin extends AbstractAdmin
         $datagridMapper
             ->add('site')
             ->add('name')
-            ->add('type', null, array('field_type' => 'sonata_page_type_choice'))
+            ->add('type', null, array('field_type' => PageTypeChoiceType::class))
             ->add('pageAlias')
             ->add('parent')
             ->add('edited')
@@ -327,7 +329,7 @@ class PageAdmin extends AbstractAdmin
         if ($this->hasSubject() && !$this->getSubject()->isInternal()) {
             $formMapper
                 ->with('form_page.group_main_label')
-                    ->add('type', 'sonata_page_type_choice', array('required' => false))
+                    ->add('type',PageTypeChoiceType::class, array('required' => false))
                 ->end()
             ;
         }
